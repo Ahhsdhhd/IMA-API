@@ -5,7 +5,7 @@ const path = require("path");
 var fs = require("fs");
 
 const url =
-  "mongodb+srv://abhinav:UX9pfpf8NmpUMT6Z@leetwolf-e0.vquxe.mongodb.net/billing?retryWrites=true&w=majority";
+ "mongodb://localhost:27017/billing";
 
 const port = process.env.port || 3000;
 
@@ -42,6 +42,7 @@ const { db } = require("./models/user");
 
 mongoose.connect(url, (err, db) => {
   if (err) throw err;
+  if(db) console.log("db con")
 });
 
 const app = express();
@@ -60,9 +61,9 @@ app.use("/auth", authRoute);
 
 app.use(express.static("frontend"));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./frontend/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./frontend/index.html"));
+// });
 
 //for netlify
 

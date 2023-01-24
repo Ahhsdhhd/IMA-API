@@ -57,7 +57,7 @@ var ReportForm = mongoose.model(
       type: String,
     },
     amount: {
-      type: String,
+      type: Number,
     },
     date: {
       type: String,
@@ -68,7 +68,7 @@ var ReportForm = mongoose.model(
     },
 
     ExpenditureAmount: {
-      type: String,
+      type: Number,
     },
   },
   "Form"

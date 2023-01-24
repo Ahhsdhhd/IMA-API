@@ -116,7 +116,7 @@ router.delete("/update/:id", (req, res) => {
 });
 
 
-///bulk delete
+///bulk delete receipt form
 
 
 router.delete("/bulkDelete", (req, res) => {

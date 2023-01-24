@@ -119,34 +119,7 @@ router.delete("/gcNumber/:gcNumber", (req, res) => {
   });
 });
 
-///------------------------------------------------  BULK POST EXPENDITURE FORM -------------------------------------------------------------------
-
-// router.post("/bulkAdd", (req, res) => {
-//   var bulkExpenditureForm = new ExpenditureForm({
-//     recordNumber: req.body.recordNumber,
-
-//     gcType: req.body.gcType,
-//     gcNumber: req.body.gcNumber,
-//     name: req.body.name,
-//     battalion: req.body.battalion,
-//     company: req.body.company,
-//     date: req.body.date,
-//     billNoDetails: req.body.billNoDetails,
-//     ExpenditureAmount: req.body.ExpenditureAmount,
-//   });
-
-//   bulkExpenditureForm.save((err, docs) => {
-//     if (!err) {
-//       res.send(docs);
-//     } else {
-//       console.log(
-//         "error in saving ExpenditureForm " + JSON.stringify(err, undefined, 2)
-//       );
-//     }
-//   });
-// });
-
-///  -------------------------------------- BULK DELETE EXPENDITURE FORM -------------------------------------------------------------------
+////////////////////bulkDelete---------------------------------------------------------------------------------------------------------------------------------------------
 
 router.delete("/bulkDelete", (req, res) => {
   ExpenditureForm.deleteMany(
@@ -165,22 +138,70 @@ router.delete("/bulkDelete", (req, res) => {
   );
 });
 
-///------------------------------------search by date-----------------------------------------------------------------------------------
+///------------------------------------search API START---------------------------------------------------------------------------------------------------------
 
+////////////////////////////////SERACH BY GCNUMBER-----------------------------------------------------------------------------------------------------
 
+router.get("/gcNumber/:gcNumber", (req, res) => {
+  ExpenditureForm.find({ gcNumber: req.params.gcNumber }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log(
+        "error in retriving Form api" + JSON.stringfy(err, undefined, 2)
+      );
+    }
+  });
+});
 
+////-------------------------------------------------------------------------search by country-----------------------//////////////////////////////////////////////////
 
-router.post("/search/date", (req, res) => {
-  ReportForm.find(
-    {
-      date: req.body.date
-     
-    },
+router.get("/country/:country", (req, res) => {
+  ExpenditureForm.find({ country: req.params.country }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log(
+        "error in retriving Form api" + JSON.stringfy(err, undefined, 2)
+      );
+    }
+  });
+});
+
+////////////////-------------------------------------------------------search  by battalion--------------------------//////////////////////////////////////////////
+
+router.get("/battalion/:battalion", (req, res) => {
+  ExpenditureForm.find({ battalion: req.params.battalion }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log(
+        "error in retriving Form api" + JSON.stringfy(err, undefined, 2)
+      );
+    }
+  });
+});
+
+///////////////////-------------------------------------------------search by status -------------------------/////////////////////////////////////////////////////
+
+router.get("/status/:status", (req, res) => {
+  ExpenditureForm.find({ status: req.params.status }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log(
+        "error in retriving Form api" + JSON.stringfy(err, undefined, 2)
+      );
+    }
+  });
+});
+/////////////////////////////////------------------------------------search by billNoDetails-----------------------////////////////////////////
+router.get("/billNoDetails/:billNoDetails", (req, res) => {
+  ExpenditureForm.find(
+    { billNoDetails: req.params.billNoDetails },
     (err, doc) => {
       if (!err) {
-       
-       
-
+        res.send(doc);
       } else {
         console.log(
           "error in retriving Form api" + JSON.stringfy(err, undefined, 2)
@@ -189,6 +210,30 @@ router.post("/search/date", (req, res) => {
     }
   );
 });
+///////////////////////////////------------------------------------search by Month ---------------------------------////////////////////////////////
+
+router.get("/month/:month", (req, res) => {
+  ExpenditureForm.find(
+    {
+      month: {
+        $gte: req.params.startingDate,
+        $lte: req.params.endingDate,
+      },
+    },
+    (err, doc) => {
+      if (!err) {
+        res.send(doc);
+      } else {
+        console.log(
+          "error in retriving Form api" + JSON.stringfy(err, undefined, 2)
+        );
+      }
+    }
+  );
+});
+
+///--------------------------------SEARCH API END----------------------------------------------------------------------------------------------------------------------------
+
 ////----------------------------------------- BULK ADD EXPENDITURE FORM  -----------------------------------------------------------------
 /*
 router.post("/bulkAdd", (req, res) => {

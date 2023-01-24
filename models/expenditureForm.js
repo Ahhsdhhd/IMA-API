@@ -42,6 +42,9 @@ var ExpenditureForm = mongoose.model('ExpenditureForm', {
    },
    ExpenditureAmount: {
       type: String
+   },amount:{
+      type:Number
+      ,default: "0.00"
    }
 }, "Form")
 

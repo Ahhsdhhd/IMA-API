@@ -46,7 +46,11 @@ var BillingForm = mongoose.model('BillingForm',{
    },
       amount:{
         type:String
-     }
+     },
+     ExpenditureAmount: {
+      type: Number,
+      default:"0.00"
+   }
 },"Form")
 
 
